@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  body {
+    background-color: #0b0c14;
+    color: #f1f5f9;
+    overflow-x: hidden;
+  }
+}
+
+/* Gradient Text Utilities */
+.text-purple-gradient {
+  background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 50%, #c084fc 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-orange-gradient {
+  background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Glassmorphism & Cards */
+.admint-card {
+  background: #12141f;
+  border: 1px solid #202436;
+  border-radius: 1rem;
+}
+
+.admint-card:hover {
+  border-color: rgba(139, 92, 246, 0.4);
+}
+
+.admint-glow {
+  box-shadow: 0 0 50px -10px rgba(139, 92, 246, 0.25);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #090a0f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #202436;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8b5cf6;
+}
