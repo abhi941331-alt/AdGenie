@@ -9,10 +9,12 @@ export function CampaignProvider({ children }) {
   const [activeTab, setActiveTab] = useState('home');
   const [promptInput, setPromptInput] = useState('');
   const [selectedAgeGroup, setSelectedAgeGroup] = useState('gen-z');
+  const [heroAgeGroup, setHeroAgeGroup] = useState('gen-z');
   const [selectedPlatforms, setSelectedPlatforms] = useState(['instagram', 'facebook']);
   const [generatedCreatives, setGeneratedCreatives] = useState([]);
   const [isGenerating, setIsGenerating] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
+  const [selectedPreviewCreative, setSelectedPreviewCreative] = useState(null);
 
   const triggerToast = (msg) => {
     setToastMessage(msg);
@@ -49,7 +51,7 @@ export function CampaignProvider({ children }) {
 
   const handleGenerate = () => {
     if (!promptInput.trim()) {
-      triggerToast('Please enter a product description brief.');
+      triggerToast('Please enter or select a product description brief.');
       return;
     }
 
@@ -60,7 +62,7 @@ export function CampaignProvider({ children }) {
       setIsGenerating(false);
       triggerToast(`Generated ${results.length} platform-tailored ad creatives!`);
 
-      // Scroll to generator output area
+      // Smooth scroll to output
       const outputElem = document.getElementById('studio-output');
       if (outputElem) {
         outputElem.scrollIntoView({ behavior: 'smooth' });
@@ -80,6 +82,8 @@ export function CampaignProvider({ children }) {
         setPromptInput,
         selectedAgeGroup,
         setSelectedAgeGroup,
+        heroAgeGroup,
+        setHeroAgeGroup,
         selectedPlatforms,
         togglePlatform,
         generatedCreatives,
@@ -90,6 +94,8 @@ export function CampaignProvider({ children }) {
         toastMessage,
         triggerToast,
         PRESET_CREATIVES,
+        selectedPreviewCreative,
+        setSelectedPreviewCreative,
       }}
     >
       {children}

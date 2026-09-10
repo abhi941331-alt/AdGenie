@@ -1,25 +1,52 @@
-// Admint Campaign Architect Data & Generator Logic
+// AdGenie Campaign Architect Data & Generator Logic
 
 export const AGE_GROUPS = [
-  { id: 'gen-z', name: 'Gen Z', range: '16–24', accent: '#a78bfa' },
-  { id: 'millennial', name: 'Millennial', range: '25–40', accent: '#f97316' },
-  { id: 'gen-x', name: 'Gen X', range: '41–56', accent: '#ec4899' },
-  { id: 'boomer', name: 'Boomer', range: '57+', accent: '#14b8a6' },
+  { id: 'gen-z', name: 'Gen Z', range: '16–24', accent: '#a78bfa', desc: 'Fast-paced, bold visuals & relatable hooks' },
+  { id: 'millennial', name: 'Millennial', range: '25–40', accent: '#f97316', desc: 'Aspirational storytelling & lifestyle value' },
+  { id: 'gen-x', name: 'Gen X', range: '41–56', accent: '#ec4899', desc: 'Direct benefits, trust signals & ROI' },
+  { id: 'boomer', name: 'Boomer', range: '57+', accent: '#14b8a6', desc: 'Legible type, warm tone & proven quality' },
 ];
 
 export const PLATFORMS = [
-  { id: 'instagram', name: 'Instagram', ratio: '4:5', aspectClass: 'aspect-[4/5]' },
-  { id: 'facebook', name: 'Facebook', ratio: '4:5', aspectClass: 'aspect-[4/5]' },
-  { id: 'youtube', name: 'YouTube', ratio: '16:9', aspectClass: 'aspect-[16/9]' },
+  { id: 'instagram', name: 'Instagram', ratio: '4:5', aspectClass: 'aspect-[4/5]', icon: 'Instagram' },
+  { id: 'facebook', name: 'Facebook', ratio: '4:5', aspectClass: 'aspect-[4/5]', icon: 'Facebook' },
+  { id: 'youtube', name: 'YouTube', ratio: '16:9', aspectClass: 'aspect-[16/9]', icon: 'Youtube' },
 ];
 
-export const SAMPLE_PROMPTS = [
-  "A refillable stainless-steel water bottle that keeps drinks cold for 24 hours, made from recycled materials.",
-  "Organic cold-pressed ceremonial grade matcha green tea powder for calm energy and focus.",
-  "Lightweight high-cushion road running shoes engineered for high-energy return.",
-  "Artisan cold brew coffee subscription delivered fresh weekly with customizable roast profiles.",
-  "AI-powered resume builder tailored to ATS algorithms in 2 minutes.",
+export const CATEGORY_PROMPTS = [
+  {
+    category: '💧 Eco Hydration',
+    prompt: 'A refillable stainless-steel water bottle that keeps drinks cold for 24 hours, made from recycled materials.',
+    age: 'millennial',
+  },
+  {
+    category: '☕ Artisan Coffee',
+    prompt: 'Single-origin artisanal cold brew coffee subscription delivered fresh weekly with customizable roast profiles.',
+    age: 'millennial',
+  },
+  {
+    category: '👟 Kinetic Footwear',
+    prompt: 'Lightweight high-cushion road running shoes engineered for high-energy return and neon night runs.',
+    age: 'gen-z',
+  },
+  {
+    category: '🍵 Ceremonial Matcha',
+    prompt: 'Organic cold-pressed ceremonial grade matcha green tea powder for calm energy and sustained focus.',
+    age: 'gen-z',
+  },
+  {
+    category: '✨ Skincare Serum',
+    prompt: 'Clean botanical skin vitality serum for instant hydration, collagen boost, and radiant glow.',
+    age: 'gen-x',
+  },
+  {
+    category: '💻 AI SaaS Builder',
+    prompt: 'AI-powered resume & portfolio builder tailored to ATS algorithms in 2 minutes with automated cover letters.',
+    age: 'gen-z',
+  },
 ];
+
+export const SAMPLE_PROMPTS = CATEGORY_PROMPTS.map((c) => c.prompt);
 
 export const HOW_IT_WORKS_STEPS = [
   {
@@ -54,24 +81,28 @@ export const AGE_AWARE_CARDS = [
     range: '16–24',
     color: '#a78bfa',
     bullets: ['Fast cuts & trends', 'Bold, saturated color', 'Native to short-form video'],
+    sampleHeadline: 'STOP SCROLLING. YOUR NEW AESTHETIC MUST-HAVE.',
   },
   {
     title: 'Millennial',
     range: '25–40',
     color: '#f97316',
     bullets: ['Story-led messaging', 'Clean, aspirational visuals', 'Value & authenticity cues'],
+    sampleHeadline: 'ELEVATE YOUR DAILY ROUTINE WITH PURE CRAFTSMANSHIP.',
   },
   {
     title: 'Gen X',
     range: '41–56',
     color: '#ec4899',
     bullets: ['Clear benefits up front', 'Trust & credibility signals', 'Balanced pacing'],
+    sampleHeadline: 'BUILT TO PERFORM. PROVEN RESULTS & ZERO COMPROMISE.',
   },
   {
     title: 'Boomer',
     range: '57+',
     color: '#14b8a6',
     bullets: ['Legible, larger type', 'Straightforward copy', 'Warm, familiar tone'],
+    sampleHeadline: 'SIMPLE, RELIABLE QUALITY MADE FOR EVERYDAY COMFORT.',
   },
 ];
 
@@ -181,6 +212,13 @@ export const PRESET_CREATIVES = [
   },
 ];
 
+export function enhancePrompt(promptText) {
+  if (!promptText) return '';
+  const trimmed = promptText.trim();
+  if (trimmed.toLowerCase().includes('special offer')) return trimmed;
+  return `${trimmed} Includes 20% launch discount, 30-day money-back guarantee, and instant free shipping.`;
+}
+
 export function generateCreativesFromPrompt(description, selectedAgeId, selectedPlatforms) {
   const ageObj = AGE_GROUPS.find((a) => a.id === selectedAgeId) || AGE_GROUPS[0];
   const noun = description.trim().split(/\s+/).slice(0, 3).join(' ') || 'Your Product';
@@ -214,7 +252,7 @@ export function generateCreativesFromPrompt(description, selectedAgeId, selected
       id: `gen-${Date.now()}-${idx}`,
       title: `${noun} for ${platform.name}`,
       headline: headline,
-      subheading: description.length > 80 ? description.slice(0, 80) + '...' : description,
+      subheading: description.length > 85 ? description.slice(0, 85) + '...' : description,
       cta: ageObj.id === 'gen-z' ? 'GET YOURS' : ageObj.id === 'millennial' ? 'Shop Now' : 'Learn More',
       type: idx % 2 === 0 ? 'image' : 'video',
       audience: ageObj.name,
