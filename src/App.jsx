@@ -1,53 +1,50 @@
 import React from 'react';
 import { CampaignProvider, useCampaign } from './context/CampaignContext';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import HowItWorks from './components/HowItWorks';
-import Studio from './components/Studio';
-import AgeAwareSection from './components/AgeAwareSection';
-import FeaturesSection from './components/FeaturesSection';
-import CtaBanner from './components/CtaBanner';
-import SamplesGallery from './components/SamplesGallery';
-import Footer from './components/Footer';
-import SignInModal from './components/SignInModal';
-import AdPreviewModal from './components/AdPreviewModal';
-import FloatingNav from './components/FloatingNav';
+import LandingPage from './components/LandingPage';
+import Sidebar from './components/Sidebar';
+import DashboardView from './components/DashboardView';
+import ResultsView from './components/ResultsView';
+import VideoPreviewView from './components/VideoPreviewView';
+import SettingsView from './components/SettingsView';
+import MyCampaignsView from './components/MyCampaignsView';
+import MobileNav from './components/MobileNav';
 import Toast from './components/Toast';
 
 function AppContent() {
-  const { activeTab, selectedPreviewCreative, setSelectedPreviewCreative } = useCampaign();
+  const { page } = useCampaign();
+
+  if (page === 'landing') {
+    return <LandingPage />;
+  }
+
+  const renderCurrentView = () => {
+    switch (page) {
+      case 'dashboard':
+        return <DashboardView />;
+      case 'results':
+        return <ResultsView />;
+      case 'videopreview':
+        return <VideoPreviewView />;
+      case 'settings':
+        return <SettingsView />;
+      case 'mycampaigns':
+        return <MyCampaignsView />;
+      default:
+        return <DashboardView />;
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-[#0b0c14] text-slate-100 font-sans relative selection:bg-admint-500 selection:text-white">
-      <FloatingNav />
-      <Navbar />
+    <div className="min-h-screen bg-[#08090f] text-slate-100 font-sans relative selection:bg-brand-500 selection:text-white">
+      <Sidebar />
 
-      <main className="max-w-7xl mx-auto px-6">
-        {activeTab === 'samples' ? (
-          <SamplesGallery />
-        ) : (
-          <>
-            <Hero />
-            <HowItWorks />
-            <Studio />
-            <AgeAwareSection />
-            <FeaturesSection />
-            <CtaBanner />
-          </>
-        )}
+      {/* Main Workspace Area with Sidebar Offset */}
+      <main className="md:pl-64 min-h-screen pb-20 md:pb-12">
+        <div className="max-w-7xl mx-auto p-6 md:p-10">{renderCurrentView()}</div>
       </main>
 
-      <Footer />
-      <SignInModal />
+      <MobileNav />
       <Toast />
-
-      {/* Interactive Ad Preview & Copy Editor Modal */}
-      {selectedPreviewCreative && (
-        <AdPreviewModal
-          creative={selectedPreviewCreative}
-          onClose={() => setSelectedPreviewCreative(null)}
-        />
-      )}
     </div>
   );
 }

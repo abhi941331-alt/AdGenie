@@ -11,38 +11,27 @@
   }
 
   body {
-    background-color: #0b0c14;
+    background-color: #08090f;
     color: #f1f5f9;
     overflow-x: hidden;
   }
 }
 
-/* Gradient Text Utilities */
+/* Custom Gradient & Glass utilities matching mockup */
 .text-purple-gradient {
-  background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 50%, #c084fc 100%);
+  background: linear-gradient(135deg, #a78bfa 0%, #6366f1 50%, #818cf8 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.text-orange-gradient {
-  background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Glassmorphism & Cards */
-.admint-card {
-  background: #12141f;
-  border: 1px solid #202436;
+.adgenie-card {
+  background-color: #121422;
+  border: 1px solid #1f2238;
   border-radius: 1rem;
 }
 
-.admint-card:hover {
-  border-color: rgba(139, 92, 246, 0.4);
-}
-
-.admint-glow {
-  box-shadow: 0 0 50px -10px rgba(139, 92, 246, 0.25);
+.adgenie-card:hover {
+  border-color: rgba(99, 102, 241, 0.4);
 }
 
 /* Custom Scrollbars */
@@ -52,14 +41,14 @@
 }
 
 ::-webkit-scrollbar-track {
-  background: #090a0f;
+  background: #08090f;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #202436;
+  background: #1f2238;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #8b5cf6;
+  background: #6366f1;
 }

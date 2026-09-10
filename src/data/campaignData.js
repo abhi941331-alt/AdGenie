@@ -1,267 +1,143 @@
-// AdGenie Campaign Architect Data & Generator Logic
+// AdGenie Campaign Architect Data & Mock Database
 
-export const AGE_GROUPS = [
-  { id: 'gen-z', name: 'Gen Z', range: '16–24', accent: '#a78bfa', desc: 'Fast-paced, bold visuals & relatable hooks' },
-  { id: 'millennial', name: 'Millennial', range: '25–40', accent: '#f97316', desc: 'Aspirational storytelling & lifestyle value' },
-  { id: 'gen-x', name: 'Gen X', range: '41–56', accent: '#ec4899', desc: 'Direct benefits, trust signals & ROI' },
-  { id: 'boomer', name: 'Boomer', range: '57+', accent: '#14b8a6', desc: 'Legible type, warm tone & proven quality' },
+export const INITIAL_USER = {
+  name: 'Nimish Gupta',
+  email: 'nimish@gmail.com',
+  plan: 'Free Plan',
+  creditsUsed: 12,
+  totalCredits: 100,
+};
+
+export const INITIAL_STATS = {
+  totalCampaigns: 12,
+  adsGenerated: 36,
+  avgEngagementScore: 78,
+};
+
+export const AUDIENCE_OPTIONS = [
+  { id: 'youth', label: 'Youth (18-25)' },
+  { id: 'professionals', label: 'Professionals (26-40)' },
+  { id: 'general', label: 'General Audience (41-60)' },
 ];
 
-export const PLATFORMS = [
-  { id: 'instagram', name: 'Instagram', ratio: '4:5', aspectClass: 'aspect-[4/5]', icon: 'Instagram' },
-  { id: 'facebook', name: 'Facebook', ratio: '4:5', aspectClass: 'aspect-[4/5]', icon: 'Facebook' },
-  { id: 'youtube', name: 'YouTube', ratio: '16:9', aspectClass: 'aspect-[16/9]', icon: 'Youtube' },
+export const PLATFORM_OPTIONS = [
+  { id: 'instagram', label: 'Instagram', color: '#E1306C' },
+  { id: 'youtube', label: 'YouTube', color: '#FF0000' },
+  { id: 'facebook', label: 'Facebook', color: '#1877F2' },
 ];
 
-export const CATEGORY_PROMPTS = [
-  {
-    category: '💧 Eco Hydration',
-    prompt: 'A refillable stainless-steel water bottle that keeps drinks cold for 24 hours, made from recycled materials.',
-    age: 'millennial',
-  },
-  {
-    category: '☕ Artisan Coffee',
-    prompt: 'Single-origin artisanal cold brew coffee subscription delivered fresh weekly with customizable roast profiles.',
-    age: 'millennial',
-  },
-  {
-    category: '👟 Kinetic Footwear',
-    prompt: 'Lightweight high-cushion road running shoes engineered for high-energy return and neon night runs.',
-    age: 'gen-z',
-  },
-  {
-    category: '🍵 Ceremonial Matcha',
-    prompt: 'Organic cold-pressed ceremonial grade matcha green tea powder for calm energy and sustained focus.',
-    age: 'gen-z',
-  },
-  {
-    category: '✨ Skincare Serum',
-    prompt: 'Clean botanical skin vitality serum for instant hydration, collagen boost, and radiant glow.',
-    age: 'gen-x',
-  },
-  {
-    category: '💻 AI SaaS Builder',
-    prompt: 'AI-powered resume & portfolio builder tailored to ATS algorithms in 2 minutes with automated cover letters.',
-    age: 'gen-z',
-  },
+export const BUDGET_OPTIONS = [
+  { id: 'starter', label: 'Starter' },
+  { id: 'standard', label: 'Standard' },
+  { id: 'scale', label: 'Scale' },
 ];
 
-export const SAMPLE_PROMPTS = CATEGORY_PROMPTS.map((c) => c.prompt);
-
-export const HOW_IT_WORKS_STEPS = [
+export const RECENT_CAMPAIGNS_DATA = [
   {
-    step: '01',
-    title: 'Describe your product',
-    description: 'Paste a sentence or two — what it is, what makes it great. No brief, no brand deck required.',
-    icon: 'PenTool',
-  },
-  {
-    step: '02',
-    title: 'Pick your audience',
-    description: "Choose a target age group. AdGenie adapts tone, pacing, color, and copy to match who's watching.",
-    icon: 'Users',
-  },
-  {
-    step: '03',
-    title: 'Generate creatives',
-    description: 'Our models produce image and video ads sized and styled for each platform you select.',
-    icon: 'Wand2',
-  },
-  {
-    step: '04',
-    title: 'Export & launch',
-    description: 'Download ready-to-run creatives, or push them straight into your ad manager to go live.',
-    icon: 'Rocket',
-  },
-];
-
-export const AGE_AWARE_CARDS = [
-  {
-    title: 'Gen Z',
-    range: '16–24',
-    color: '#a78bfa',
-    bullets: ['Fast cuts & trends', 'Bold, saturated color', 'Native to short-form video'],
-    sampleHeadline: 'STOP SCROLLING. YOUR NEW AESTHETIC MUST-HAVE.',
-  },
-  {
-    title: 'Millennial',
-    range: '25–40',
-    color: '#f97316',
-    bullets: ['Story-led messaging', 'Clean, aspirational visuals', 'Value & authenticity cues'],
-    sampleHeadline: 'ELEVATE YOUR DAILY ROUTINE WITH PURE CRAFTSMANSHIP.',
-  },
-  {
-    title: 'Gen X',
-    range: '41–56',
-    color: '#ec4899',
-    bullets: ['Clear benefits up front', 'Trust & credibility signals', 'Balanced pacing'],
-    sampleHeadline: 'BUILT TO PERFORM. PROVEN RESULTS & ZERO COMPROMISE.',
-  },
-  {
-    title: 'Boomer',
-    range: '57+',
-    color: '#14b8a6',
-    bullets: ['Legible, larger type', 'Straightforward copy', 'Warm, familiar tone'],
-    sampleHeadline: 'SIMPLE, RELIABLE QUALITY MADE FOR EVERYDAY COMFORT.',
-  },
-];
-
-export const FEATURES = [
-  {
-    title: 'Image & video, together',
-    description: 'Generate static creatives and short-form video from the same prompt — no separate tools or handoffs.',
-    icon: 'Image',
-  },
-  {
-    title: 'Platform-perfect sizing',
-    description: 'Every asset is exported in the exact aspect ratio and safe zones each platform expects.',
-    icon: 'LayoutGrid',
-  },
-  {
-    title: 'Seconds, not days',
-    description: 'A full set of on-brand variants is ready in the time it takes to write a caption.',
-    icon: 'Gauge',
-  },
-  {
-    title: 'Built-in variants for testing',
-    description: 'Ship multiple headlines and hooks per creative so you can A/B test from day one.',
-    icon: 'FlaskConical',
-  },
-  {
-    title: 'Copy that matches the visual',
-    description: "Headlines and CTAs are written alongside the imagery, tuned to your audience's voice.",
-    icon: 'Languages',
-  },
-  {
-    title: 'Motion presets',
-    description: 'Choose energetic, cinematic, or minimal motion styles to fit the campaign mood.',
-    icon: 'Video',
-  },
-];
-
-export const PRESET_CREATIVES = [
-  {
-    id: 'velocity-x',
-    title: 'Velocity X Running Shoes',
-    headline: 'OWN THE NIGHT VELOCITY X',
-    subheading: 'UNLEASH YOUR ENERGY. LIGHTSPEED CUSHIONING NEON IGNITION',
-    cta: 'SHOP NOW',
-    type: 'image',
-    audience: 'Gen Z',
+    id: 'camp-1',
+    title: 'Wireless Earbuds',
+    description: 'Wireless earbuds with long battery life, active noise cancellation, and crystal clear sound.',
     platform: 'Instagram',
-    ratio: '4:5',
-    imageUrl: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80',
-    overlayBg: 'linear-gradient(180deg, rgba(88,28,135,0.7) 0%, rgba(15,23,42,0.9) 100%)',
-    tag: '@KINETIC_RUN',
+    audience: 'Youth (18-25)',
+    budget: 'Standard',
+    status: 'Completed',
+    timeAgo: '2 minutes ago',
+    score: 92,
+    variants: [
+      {
+        id: 'var-1',
+        name: 'Variant 1',
+        score: 92,
+        headline: 'Crystal Clear Sound',
+        caption: 'Experience music like never before.',
+        cta: 'Get Yours Today',
+        overlayText: 'Small Size. Big Sound.',
+        imageUrl: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=800&q=80',
+        videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-close-up-of-wireless-earbuds-42998-large.mp4',
+        duration: '15 seconds',
+        resolution: '1080 x 1080 (Instagram)',
+        format: 'MP4',
+      },
+      {
+        id: 'var-2',
+        name: 'Variant 2',
+        score: 78,
+        headline: 'Freedom in Every Beat',
+        caption: 'Stay connected. Stay you.',
+        cta: 'Shop Now',
+        overlayText: 'Music In Your World',
+        imageUrl: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80',
+        videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-close-up-of-wireless-earbuds-42998-large.mp4',
+        duration: '15 seconds',
+        resolution: '1080 x 1080 (Instagram)',
+        format: 'MP4',
+      },
+      {
+        id: 'var-3',
+        name: 'Variant 3',
+        score: 85,
+        headline: 'Premium Sound. Everyday.',
+        caption: 'Designed for your lifestyle.',
+        cta: 'Buy Now',
+        overlayText: 'Premium Sound For Everyday',
+        imageUrl: 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=800&q=80',
+        videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-close-up-of-wireless-earbuds-42998-large.mp4',
+        duration: '15 seconds',
+        resolution: '1080 x 1080 (Instagram)',
+        format: 'MP4',
+      },
+    ],
   },
   {
-    id: 'aurora-cold-brew',
-    title: 'Aurora Cold Brew Coffee',
-    headline: 'YOUR MORNING ESCAPE',
-    subheading: 'AURORA COLD BREW. SMOOTH. BOLD. REFRESHING.',
-    cta: 'Shop Now',
-    type: 'image',
-    audience: 'Millennial',
-    platform: 'Facebook',
-    ratio: '4:5',
-    imageUrl: 'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=800&q=80',
-    overlayBg: 'linear-gradient(180deg, rgba(30,27,75,0.4) 0%, rgba(15,23,42,0.85) 100%)',
-    tag: '@auroracoldbrew',
-  },
-  {
-    id: 'aera-skin',
-    title: 'Auræ Vitality Serum',
-    headline: 'RADIANCE REDEFINED',
-    subheading: 'Discover the glow within. Lightweight. Potent. Pure.',
-    cta: 'SHOP NOW',
-    type: 'image',
-    audience: 'Gen X',
-    platform: 'Instagram',
-    ratio: '4:5',
-    imageUrl: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=80',
-    overlayBg: 'linear-gradient(180deg, rgba(20,83,45,0.3) 0%, rgba(15,23,42,0.85) 100%)',
-    tag: 'AURAE SKIN',
-  },
-  {
-    id: 'matcha-fuel',
-    title: 'Ceremonial Matcha Powder',
-    headline: 'CALM ENERGY. ZERO CRASH.',
-    subheading: 'Ceremonial Grade Organic Matcha. Focus for hours.',
-    cta: 'Order Today',
-    type: 'image',
-    audience: 'Gen Z',
-    platform: 'Facebook',
-    ratio: '4:5',
-    imageUrl: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=800&q=80',
-    overlayBg: 'linear-gradient(180deg, rgba(6,78,59,0.5) 0%, rgba(15,23,42,0.9) 100%)',
-    tag: '#MatchaVibes',
-  },
-  {
-    id: 'hydrate-pro',
-    title: 'HydratePro Smart Bottle',
-    headline: 'HYDRATION ELEVATED',
-    subheading: '24hr Insulation. Recycled Grade Stainless Steel.',
-    cta: 'Claim 20% Off',
-    type: 'image',
-    audience: 'Boomer',
+    id: 'camp-2',
+    title: 'Protein Bar Launch',
+    description: 'High protein organic energy bar with zero added sugar.',
     platform: 'YouTube',
-    ratio: '16:9',
-    imageUrl: 'https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=800&q=80',
-    overlayBg: 'linear-gradient(180deg, rgba(30,58,138,0.5) 0%, rgba(15,23,42,0.85) 100%)',
-    tag: 'HYDRATE PRO',
+    audience: 'Youth (18-25)',
+    budget: 'Standard',
+    status: 'Completed',
+    timeAgo: '4 days ago',
+    score: 88,
+    variants: [
+      {
+        id: 'var-2-1',
+        name: 'Variant 1',
+        score: 88,
+        headline: 'Fuel Your Workout',
+        caption: '20g protein. Zero added sugar.',
+        cta: 'Order Now',
+        overlayText: 'PURE ENERGY',
+        imageUrl: 'https://images.unsplash.com/photo-1622484210800-88517572bf92?auto=format&fit=crop&w=800&q=80',
+        duration: '20 seconds',
+        resolution: '1920 x 1080 (YouTube)',
+        format: 'MP4',
+      },
+    ],
+  },
+  {
+    id: 'camp-3',
+    title: 'Skincare Product',
+    description: 'Botanical hydration serum for instant glowing skin.',
+    platform: 'Facebook',
+    audience: 'General Audience (41-60)',
+    budget: 'Standard',
+    status: 'Completed',
+    timeAgo: '1 week ago',
+    score: 94,
+    variants: [
+      {
+        id: 'var-3-1',
+        name: 'Variant 1',
+        score: 94,
+        headline: 'Radiance Redefined',
+        caption: 'Discover the glow within.',
+        cta: 'Learn More',
+        overlayText: 'NATURAL GLOW',
+        imageUrl: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=80',
+        duration: '15 seconds',
+        resolution: '1080 x 1080 (Facebook)',
+        format: 'MP4',
+      },
+    ],
   },
 ];
-
-export function enhancePrompt(promptText) {
-  if (!promptText) return '';
-  const trimmed = promptText.trim();
-  if (trimmed.toLowerCase().includes('special offer')) return trimmed;
-  return `${trimmed} Includes 20% launch discount, 30-day money-back guarantee, and instant free shipping.`;
-}
-
-export function generateCreativesFromPrompt(description, selectedAgeId, selectedPlatforms) {
-  const ageObj = AGE_GROUPS.find((a) => a.id === selectedAgeId) || AGE_GROUPS[0];
-  const noun = description.trim().split(/\s+/).slice(0, 3).join(' ') || 'Your Product';
-  
-  const results = [];
-
-  const platformList = selectedPlatforms.length > 0
-    ? PLATFORMS.filter((p) => selectedPlatforms.includes(p.id))
-    : [PLATFORMS[0], PLATFORMS[1]];
-
-  const headlinesByAge = {
-    'gen-z': ['STOP SCROLLING. MEET ' + noun.toUpperCase(), 'YOUR NEW AESTHETIC MUST-HAVE', 'HIGH IMPACT. ZERO FRICTION.'],
-    'millennial': [noun + ' — Elevate Your Daily Routine', 'Pure Quality, Crafted For You', 'The Upgrade You Deserve'],
-    'gen-x': ['Built To Perform: ' + noun, 'Proven Results & Uncompromised Quality', 'Clear Benefits. Maximum Value.'],
-    'boomer': ['Simple, Reliable ' + noun, 'Easy to Use. Exceptional Results.', 'Traditional Craftsmanship Meets Modern Design.'],
-  };
-
-  const images = [
-    'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1517701604599-bb29b565090c?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=800&q=80',
-    'https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&w=800&q=80',
-  ];
-
-  platformList.forEach((platform, idx) => {
-    const hlList = headlinesByAge[selectedAgeId] || headlinesByAge['gen-z'];
-    const headline = hlList[idx % hlList.length];
-
-    results.push({
-      id: `gen-${Date.now()}-${idx}`,
-      title: `${noun} for ${platform.name}`,
-      headline: headline,
-      subheading: description.length > 85 ? description.slice(0, 85) + '...' : description,
-      cta: ageObj.id === 'gen-z' ? 'GET YOURS' : ageObj.id === 'millennial' ? 'Shop Now' : 'Learn More',
-      type: idx % 2 === 0 ? 'image' : 'video',
-      audience: ageObj.name,
-      platform: platform.name,
-      ratio: platform.ratio,
-      imageUrl: images[idx % images.length],
-      tag: `@adgenie.${platform.id}`,
-    });
-  });
-
-  return results;
-}

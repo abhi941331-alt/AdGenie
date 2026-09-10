@@ -8,26 +8,16 @@ export default {
   theme: {
     extend: {
       colors: {
-        admint: {
-          50: '#f5f3ff',
-          100: '#ede9fe',
-          200: '#ddd6fe',
-          300: '#c4b5fd',
-          400: '#a78bfa',
-          500: '#8b5cf6',
-          600: '#7c3aed',
-          700: '#6d28d9',
-          800: '#5b21b6',
-          900: '#4c1d95',
+        darkBg: '#090a10',
+        darkCard: '#131522',
+        darkCardHover: '#1c1f33',
+        darkBorder: '#1f2238',
+        brand: {
+          400: '#818cf8',
+          500: '#6366f1',
+          600: '#4f46e5',
+          700: '#4338ca',
         },
-        admintOrange: {
-          400: '#fb923c',
-          500: '#f97316',
-          600: '#ea580c',
-        },
-        darkBg: '#090a0f',
-        darkCard: '#12141f',
-        darkCardBorder: '#202436',
       },
       fontFamily: {
         sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
@@ -35,10 +25,8 @@ export default {
       },
       animation: {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-        'spin-slow': 'spin 12s linear infinite',
       }
     },
   },
   plugins: [],
 }
-
